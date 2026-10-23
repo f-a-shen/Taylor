@@ -19,6 +19,9 @@ h1, h2 {
 }
 
 .frame {
+  position: relative;
+  display: block;
+  overflow: hidden;
   width: 360px;
   height: 540px;
   margin: 10px auto;
@@ -26,6 +29,8 @@ h1, h2 {
   padding: 1px;
   box-sizing: border-box;
   background-color: #f8f8f8;
+  color: #fff;
+  text-decoration: none;
 }
 
 .image {
@@ -33,6 +38,61 @@ h1, h2 {
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 350ms ease, filter 350ms ease;
+}
+
+.thesis-caption {
+  position: absolute;
+  right: 1px;
+  bottom: 1px;
+  left: 1px;
+  padding: 28px 20px 20px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.82));
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 250ms ease, transform 250ms ease;
+}
+
+.frame:hover .image,
+.frame:focus-visible .image {
+  filter: brightness(0.88);
+  transform: scale(1.025);
+}
+
+.frame:hover .thesis-caption,
+.frame:focus-visible .thesis-caption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.frame:focus-visible {
+  outline: 3px solid #315a7d;
+  outline-offset: 4px;
+}
+
+@media (hover: none) {
+  .thesis-caption {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .frame {
+    width: calc(100vw - 32px);
+    height: auto;
+    aspect-ratio: 2 / 3;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image,
+  .thesis-caption {
+    transition: none;
+  }
 }
 
 footer {
